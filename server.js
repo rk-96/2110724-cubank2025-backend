@@ -36,9 +36,15 @@ app.use(xss());
 app.use(hpp());
 
 // CORS settings
+// Allow both local development and the deployed Vercel frontend.
+// Note: origin should be the scheme + host (no path). The user provided
+// a URL with a path (/1) — we allow the host `https://2110724-cubank2025-frontend.vercel.app`.
 const corsOptions = {
-    origin: 'http://localhost:3000', // Allow requests from this origin
-    credentials: true,               // Enable sending credentials (cookies, etc.)
+    origin: [
+        'http://localhost:3000',
+        'https://2110724-cubank2025-frontend.vercel.app'
+    ], // Allow requests from these origins
+    credentials: true, // Enable sending credentials (cookies, etc.)
 };
 app.use(cors(corsOptions));
 
